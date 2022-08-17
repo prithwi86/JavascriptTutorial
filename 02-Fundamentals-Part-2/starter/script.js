@@ -40,7 +40,7 @@ const jonas =
     friends: ['Michael','Tom','Steven'],
     calcAge: function()
     {
-        this.age = 2037 - this.birthyear;
+        return this.age = 2037 - this.birthyear;
     },
     hasDriversLicense: false,
     getSummary: function() 
@@ -48,18 +48,19 @@ const jonas =
         //this.calcAge;
         //let license;
         //this.hasDriversLicense? license = 'a': license = 'no';
-        return `${this.firstName} is a ${this.calcAge}-year old ${this.job}, 
+        return `${this.firstName} is a ${this.calcAge()}-year old ${this.job}, 
         and he has ${this.hasDriversLicense? 'a': 'no'} 
         driver's license.`
     }
     
 };
-jonas.calcAge();
+//jonas.calcAge();
 console.log(`${jonas.firstName} has ${jonas.friends.length} friends, and his best friend
  is ${jonas.friends[0]}`);
  console.log(jonas.getSummary());
- */
-const calcBMI = (weight, height) => weight / height ** 2;
+*/ 
+
+/* const calcBMI = (weight, height) => weight / height ** 2;
 
 const mark = 
 {
@@ -83,3 +84,41 @@ const objName = mark.calcBMI() > john.calcBMI() ? console.log(`${mark.firstName}
 : console.log(`${john.firstName}'s BMI (${john.calcBMI()}) is higher than ${mark.firstName} BMI (${mark.calcBMI()})!!`);
 
 //console.log(`${${objName}['firstName']}'s BMI (${objName['calcBMI']}) is higher `);
+*/
+/*let dice = Math.trunc(Math.random() * 6) + 1;
+
+do
+{
+    console.log(`You rolled a ${dice}`);
+    dice = Math.trunc(Math.random() * 6) + 1;
+    if(dice === 6)
+        console.log(`You rolled a ${dice}. Loop is about to end......`);
+}
+while(dice !== 6)*/
+
+const bills = [22,295,176,440,37,105,10,1100,86,52];
+const calcTip = billValue => billValue >= 50 && billValue <= 300 ? billValue * .15 : billValue * .2;
+
+let tips = [];
+let totals = [];
+
+for (let i = 0; i < bills.length ; i++)
+{
+    const tempTip = calcTip(bills[i]);
+    tips.push(tempTip);
+    totals.push(bills[i] + tempTip);   
+}
+console.log(tips,totals);
+const calcAverage = function (arr)
+    {
+        let arrSum = 0;
+        for(let i = 0; i < arr.length; i++)
+        {
+            arrSum += arr[i];
+        }
+        return arrSum / arr.length;
+    };
+
+console.log(`Totals avg ${calcAverage(totals)}`);
+console.log(`Totals avg ${calcAverage(tips)}`);
+
