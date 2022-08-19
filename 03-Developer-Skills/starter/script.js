@@ -1,0 +1,4 @@
+// Remember, we're gonna use strict mode in all scripts now!
+'use strict';
+const calcAge = (birthYear) => 2037 - birthYear;
+console.log(`The age is ${calcAge(1990)}`);
