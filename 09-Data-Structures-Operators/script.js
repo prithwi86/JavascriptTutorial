@@ -71,6 +71,12 @@ const game = {
     console.log('Goals were scored by ' + [...playerArr]);
     console.log(`${playerArr.length} goals scored`);
   },
+  avgOdd() {
+    let total = 0;
+    const oddArr = Object.entries(this.odds);
+    for (const [key, i] of oddArr) total += i;
+    console.log(`Average Odd: ${total / oddArr.length}`);
+  },
 };
 
 const [players1, players2] = game.players;
@@ -95,5 +101,16 @@ game.printGoals('Davies', 'Muller', 'Lewandowski');
 team1 > team2 && console.log('Team2 likely to win');
 team2 > team1 && console.log('Team1 likely to win');
 
-//const users = [{ name: 'Prithwi Ghosh', email: 'email.com' }];
+const users = [{ name: 'Prithwi Ghosh', email: 'email.com' }];
 console.log(users[0]?.name ?? 'firstname field not found');
+
+for (const [key, value] of game.scored.entries()) {
+  console.log(`Goal ${key}:${value}`);
+  //console.log(item);
+}
+
+game.avgOdd();
+
+console.log(`Odd of victory ${game.team1}: ${team1}
+Odd of draw:${draw}
+Odd of victory ${game.team2}: ${team2}`);
