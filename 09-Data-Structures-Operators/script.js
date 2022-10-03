@@ -230,14 +230,6 @@ console.log(flightDetails);
 
 for (const details of flightDetails) {
   const [type, from, to, time] = details.split(';');
-  // let output = `${items[0]
-  //   .replace('_', '')
-  //   .replace('_', ' ')
-  //   .replace('Delayed', '🔴 Delayed')} from ${items[1]
-  //   .slice(0, 3)
-  //   .toUpperCase()} to ${items[2]
-  //   .slice(0, 3)
-  //   .toUpperCase()} (${items[3].replace(':', 'h')})`;
 
   const getAirportCode = str => str.slice(0, 3).toUpperCase();
 
@@ -247,8 +239,7 @@ for (const details of flightDetails) {
   )} from ${getAirportCode(from)} to ${getAirportCode(to)} (${time.replace(
     ':',
     'h'
-  )})`.padStart(40);
+  )})`.padStart(45);
 
-  //if (output.split(' ')[0].toLowerCase() === 'delayed') output = '🔴 ' + output;
   console.log(output);
 }
