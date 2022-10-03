@@ -247,7 +247,7 @@ for (const details of flightDetails) {
   )} from ${getAirportCode(from)} to ${getAirportCode(to)} (${time.replace(
     ':',
     'h'
-  )})`.padStart(45);
+  )})`.padStart(40);
 
   //if (output.split(' ')[0].toLowerCase() === 'delayed') output = '🔴 ' + output;
   console.log(output);
