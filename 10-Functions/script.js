@@ -156,8 +156,21 @@
 
 //IIFE (Immediately Invoked Function Expressions)
 
-(function () {
-  console.log('This will never run again');
-})();
+// (function () {
+//   console.log('This will never run again');
+// })();
 
-(() => console.log('This will also never run again'))();
+// (() => console.log('This will also never run again'))();
+
+// setTimeout(function () {
+//   console.log('TIMER');
+// }, 4000);
+
+// (function () {
+//   const header = document.querySelector('h1');
+//   header.style.color = 'red';
+
+//   document
+//     .querySelector('body')
+//     .addEventListener('click', () => (header.style.color = 'blue'));
+// })();
