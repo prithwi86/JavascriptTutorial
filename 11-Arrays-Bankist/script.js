@@ -80,9 +80,9 @@ const displayMovements = function (movements) {
 };
 //displayMovements(account1.movements);
 
-const calcDisplayBalance = function (movements) {
-  const balance = movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${balance} €`;
+const calcDisplayBalance = function (account) {
+  account.balance = account.movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${account.balance} €`;
 };
 
 // calcDisplayBalance(account1.movements);
@@ -114,10 +114,21 @@ const createUserName = accnts =>
   );
 createUserName(accounts);
 
+const updateUI = function (acc) {
+  //Display movements
+  displayMovements(acc.movements);
+
+  //Display balance
+  calcDisplayBalance(acc);
+
+  //Display summary
+  calcDisplaySummary(acc);
+};
+
 let currentAccount;
 
 btnLogin.addEventListener('click', e => {
-  console.log('LOGIN');
+  //console.log('LOGIN');
   e.preventDefault();
   currentAccount = accounts.find(
     acc => acc.userName === inputLoginUsername.value
@@ -134,15 +145,60 @@ btnLogin.addEventListener('click', e => {
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
 
-    //Display movements
-    displayMovements(currentAccount.movements);
-
-    //Display balance
-    calcDisplayBalance(currentAccount.movements);
-
-    //Display summary
-    calcDisplaySummary(currentAccount);
+    updateUI(currentAccount);
   }
+});
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+  const loanAmt = Number(inputLoanAmount.value);
+  inputLoanAmount.value = '';
+  if (
+    loanAmt > 0 &&
+    currentAccount.movements.some(mov => mov >= 0.1 * loanAmt)
+  ) {
+    currentAccount.movements.push(loanAmt);
+
+    updateUI(currentAccount);
+  }
+});
+
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(
+    acc => acc.userName === inputTransferTo.value
+  );
+
+  inputTransferAmount.value = inputTransferTo.value = '';
+
+  if (
+    amount > 0 &&
+    receiverAcc &&
+    currentAccount.balance >= amount &&
+    receiverAcc.userName !== currentAccount.userName
+  ) {
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+
+    updateUI(currentAccount);
+  } else console.log('Failed Transfer');
+});
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (
+    inputCloseUsername.value === currentAccount.userName &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    const delIndex = accounts.findIndex(
+      acc => acc.userName === currentAccount.userName
+    );
+    accounts.splice(delIndex, 1);
+    containerApp.style.opacity = 0;
+  }
+  inputClosePin.value = inputCloseUsername.value = '';
 });
 
 /////////////////////////////////////////////////
@@ -156,7 +212,7 @@ btnLogin.addEventListener('click', e => {
 // ]);
 
 //const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-console.log(accounts);
+//console.log(accounts);
 
 // /////////////////////////////////////////////////
 
