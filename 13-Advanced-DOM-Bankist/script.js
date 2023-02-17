@@ -32,3 +32,33 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+const allSections = document.querySelectorAll('.section');
+console.log(allSections);
+
+const allButtons = document.getElementsByClassName('btn');
+console.log(allButtons);
+
+const header = document.querySelector('.header');
+
+const message = document.createElement('div');
+message.classList.add('cookie-message');
+message.innerHTML = `We use cookies for improved functioanlity and analytics. 
+<button class="btn btn--close-cookie">Got it!</btn>`;
+
+header.prepend(message);
+//header.append(message.cloneNode(true));
+//header.append(message);
+header.before(message);
+
+document
+  .querySelector('.btn--close-cookie')
+  .addEventListener('click', function () {
+    message.remove();
+  });
+
+message.style.backgroundColor = '#37383d';
+message.style.height =
+  Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
+
+document.documentElement.style.setProperty('--color-primary', 'orangered');
